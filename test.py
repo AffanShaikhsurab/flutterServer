@@ -25,12 +25,16 @@ def generate():
     response = requests.post(url, files=files)
 
     if response.status_code == 200:
+        content = response.content
         # Do something with the response
         with open('generated_code.py', 'wb') as f:
             f.write(response.content)
         print('File saved as generated_code.py')
+        return content
+        
     else:
         print('Error:', response.status_code)
+    
 
 if __name__ == "__main__":
     import uvicorn
